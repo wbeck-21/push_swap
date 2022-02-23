@@ -69,6 +69,8 @@ void    ft_pa(t_stack **stack_a, t_stack **stack_b)
 
     new_firts_elem = *stack_b;
     ft_lstadd_front(&stack_a,  new_firts_elem);
+
+    write(1, "pa\n", 3);
 }
 
 void    ft_pb(t_stack **stack_a, t_stack **stack_b)
@@ -77,5 +79,7 @@ void    ft_pb(t_stack **stack_a, t_stack **stack_b)
 
     new_firts_elem = *stack_a;
     ft_lstadd_front(&stack_b,  new_firts_elem);
+
+    write(1, "pb\n", 3);
 }
 
