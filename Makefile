@@ -8,7 +8,7 @@ LIB		= ./libft/libft.a
 
 INC		= -I ./libft
 
-SRCS	= push_swap.c
+SRCS	= push_swap.c parsing.c swap.c rotate.c rev_rotate.c
 
 OBJS	= $(SRCS:.c=.o)
 
