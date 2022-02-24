@@ -52,7 +52,7 @@ void    ft_rrr(t_stack **stack_a, t_stack **stack_b)
 }
 
 
-void	ft_lstadd_front(t_list ***lst, t_list *new)
+void	ft_listadd_front(t_stack ***lst, t_stack *new)
 {
 	if (**lst)
 	{
@@ -68,7 +68,7 @@ void    ft_pa(t_stack **stack_a, t_stack **stack_b)
     t_stack *new_firts_elem;
 
     new_firts_elem = *stack_b;
-    ft_lstadd_front(&stack_a,  new_firts_elem);
+    ft_listadd_front(&stack_a,  new_firts_elem);
 
     write(1, "pa\n", 3);
 }
@@ -78,7 +78,7 @@ void    ft_pb(t_stack **stack_a, t_stack **stack_b)
     t_stack *new_firts_elem;
 
     new_firts_elem = *stack_a;
-    ft_lstadd_front(&stack_b,  new_firts_elem);
+    ft_listadd_front(&stack_b,  new_firts_elem);
 
     write(1, "pb\n", 3);
 }

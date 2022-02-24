@@ -9,8 +9,19 @@ void print_list(t_stack *stack_a)
         printf("%d\n", current->nbr);
         current = current->next;
     }
+}
 
-    printf("\n\n\n");
+int	ft_listsize(t_stack *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
 
 static void	ft_listadd_back(t_stack **lst, t_stack *new)
@@ -42,7 +53,7 @@ static t_stack *init_elem(int elem)
     return (elem_stack);
 }
 
-static t_stack *fill_stack(char **elem)
+static t_stack *fill_stack_a(char **elem)
 {
     t_stack *stack_a;
     int i;
@@ -56,6 +67,50 @@ static t_stack *fill_stack(char **elem)
     return stack_a;
 }
 
+// void full_array(int **array, t_stack **elem)
+// {
+//     int i;
+
+//     i = 0;
+  
+
+
+
+static t_stack *fill_stack_b(t_stack **elem)
+{
+    t_stack *stack_b = NULL;
+    int *array;
+    int size;
+    // int max;
+    // int mim;
+    // int med;
+
+    size = ft_listsize(*elem);
+    array = (int *)malloc(sizeof(int) * size);
+    if (!array)
+        return NULL;
+
+    int i = 0; //checking
+    while (size > 0)
+    {
+        array[i++] = (*elem)->nbr;
+        (*elem) = (*elem)->next;
+        size--;
+    }
+    i = 0;
+    while(array[i])
+        printf("%d,", array[i++]);
+    // full_array(&array)
+    // if (size > 3)
+    // {
+
+    // }
+    // else 
+    //   triple sort
+    return stack_b;
+}
+
+
 
 void parsing(int argc, char **argv)
 {
@@ -63,6 +118,7 @@ void parsing(int argc, char **argv)
     char **res;
     int i;
     t_stack *stack_a;
+    t_stack *stack_b;
 
     stack_a = NULL;
     stack_a = (t_stack *)malloc(sizeof(t_stack));
@@ -83,10 +139,11 @@ void parsing(int argc, char **argv)
     }
     res = ft_split(str, ' '); //work correct!!
     free(str);
-    stack_a = fill_stack(res);
-    print_list(stack_a); //checking fulling struct
-    ft_rra(&stack_a);
-    print_list(stack_a); //checking fulling struct
+    stack_a = fill_stack_a(res);
+    stack_b = fill_stack_b(&stack_a);
 
+    // print_list(stack_a); //checking fulling struct
     free(res);
-}
+
+   
+    }
