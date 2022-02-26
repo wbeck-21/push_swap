@@ -75,10 +75,17 @@ void    ft_pa(t_stack **stack_a, t_stack **stack_b)
 
 void    ft_pb(t_stack **stack_a, t_stack **stack_b)
 {
-    t_stack *new_firts_elem;
+    t_stack	*a;
+	t_stack	*b;
 
-    new_firts_elem = *stack_a;
-    ft_listadd_front(&stack_b,  new_firts_elem);
+	if (*stack_a)
+	{
+		b = *stack_b;
+		a = *stack_a;
+		(*stack_a) = (*stack_a)->next;
+		(*stack_b) = a;
+		(*stack_b)->next = b;
+	}	
 
     write(1, "pb\n", 3);
 }

@@ -67,46 +67,67 @@ static t_stack *fill_stack_a(char **elem)
     return stack_a;
 }
 
-// void full_array(int **array, t_stack **elem)
-// {
-//     int i;
-
-//     i = 0;
-  
 
 
+int *sort_arr(t_stack *elem, int *array, int size)
+{
+    int i;
+    int j;
+    int temp;
+    
+    i = -1;
+	while (++i < size)
+	{
+        array[i] = elem->nbr;
+        elem = elem->next;
+	}
+	i = -1;
+	while (++i < size - 1)
+	{
+		j = i;
+		while (++j < size)
+		{
+			if (array[i] > array[j])
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+			}
+		}
+	}
+    return (array);
+}
 
-static t_stack *fill_stack_b(t_stack **elem)
+static t_stack *fill_stack_b(t_stack **stack_a)
 {
     t_stack *stack_b = NULL;
     int *array;
     int size;
-    // int max;
-    // int mim;
-    // int med;
+    int min;
+    int med;
+    int max;
 
-    size = ft_listsize(*elem);
+    size = ft_listsize(*stack_a);
     array = (int *)malloc(sizeof(int) * size);
     if (!array)
         return NULL;
+    array = sort_arr(*stack_a, array, size); //work
+    min = array[0];
+    med = array[size / 2];
+    max = array[size - 1];
 
-    int i = 0; //checking
-    while (size > 0)
+    while (size > 3)
     {
-        array[i++] = (*elem)->nbr;
-        (*elem) = (*elem)->next;
-        size--;
+        if ((*stack_a)->nbr == max || (*stack_a)->nbr == med || (*stack_a)->nbr == min)
+            ft_ra(stack_a);
+        else
+        {
+            ft_pb(stack_a, &stack_b);
+            size--;
+        }
     }
-    i = 0;
-    while(array[i])
-        printf("%d,", array[i++]);
-    // full_array(&array)
-    // if (size > 3)
-    // {
-
-    // }
-    // else 
     //   triple sort
+    
     return stack_b;
 }
 
@@ -143,7 +164,7 @@ void parsing(int argc, char **argv)
     stack_b = fill_stack_b(&stack_a);
 
     // print_list(stack_a); //checking fulling struct
-    free(res);
+    // print_list(stack_b); //checking fulling struct
 
-   
+    free(res);
     }
