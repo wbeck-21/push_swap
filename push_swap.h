@@ -9,9 +9,19 @@
 typedef struct s_stack {
     int nbr;
     struct s_stack *next;
+    int	count_ra;
+	int	count_rra;
+	int	count_rb;
+	int	count_rrb;
 } t_stack;
 
 void parsing(int argc, char **argv);
+t_stack *fill_stack_a(char **elem);
+t_stack *fill_stack_b(t_stack **stack_a);
+void print_list(t_stack *stack_a);
+void	free_matrix(char **res);
+void moving_to_stack_a(t_stack **stack_a, t_stack **stack_b);
+int	ft_listsize(t_stack *lst);
 
 void   	ft_sa(t_stack **stack_a);
 void   	ft_sb(t_stack **stack_b);
