@@ -26,13 +26,8 @@ void	free_matrix(char **res)
 
 int	ft_listsize(t_stack *lst)
 {
-	int	i;
-
-	i = 0;
-	while (lst)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	if (lst == NULL)
+		return (0);
+	else
+		return (1 + ft_listsize(lst->next));
 }

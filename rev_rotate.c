@@ -1,24 +1,33 @@
 # include "push_swap.h"
 
+t_stack	*before_last_stack_elem(t_stack *stack)
+{
+	if (stack == NULL)
+		return (NULL);
+	if (stack->next == NULL)
+		return (NULL);
+	if (stack->next->next == NULL)
+		return (stack);
+	else
+		return (before_last_stack_elem(stack->next));
+}
+
+void	stack_add_front(t_stack **stack, t_stack *new)
+{
+	new->next = *stack;
+	*stack = new;
+}
+
 void   	ft_rra(t_stack **stack_a)
 {
-    t_stack *new_last_elem;
-    t_stack *first_elem;
-    
-    new_last_elem = NULL;
-    first_elem = *stack_a;
-    if (*stack_a == NULL || (*stack_a)->next == NULL)
-        return;
-    while (first_elem->next != NULL)
-    {
-        new_last_elem = first_elem;
-        first_elem = first_elem->next;
+    t_stack	*before_last;
+
+	if (*stack_a && (*stack_a)->next)
+	{
+		before_last = before_last_stack_elem(*stack_a);
+		stack_add_front(stack_a, before_last->next);
+		before_last->next = NULL;
     }
-    new_last_elem->next = NULL;
-
-    first_elem->next = *stack_a; 
-
-    *stack_a = first_elem;
     write(1, "rra\n", 4);
 }
 
@@ -65,11 +74,17 @@ void	ft_listadd_front(t_stack ***lst, t_stack *new)
 
 void    ft_pa(t_stack **stack_a, t_stack **stack_b)
 {
-    t_stack *new_firts_elem;
+    t_stack	*p_a;
+	t_stack	*p_b;
 
-    new_firts_elem = *stack_b;
-    ft_listadd_front(&stack_a,  new_firts_elem);
-
+	if (*stack_b)
+	{
+		p_a = *stack_a;
+		p_b = *stack_b;
+		(*stack_b) = (*stack_b)->next;
+		(*stack_a) = p_b;
+		(*stack_a)->next = p_a;
+	}
     write(1, "pa\n", 3);
 }
 

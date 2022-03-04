@@ -1,22 +1,16 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/04 01:39:52 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/04 18:53:44 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// void check_res(char **res)
-// {
-//     int i = 0;
-//     int j;
-
-//     while(res[i])
-//     {
-//         j = 0;
-//         while(res[i][j])
-//         {
-//             printf("%s\n", res[i]);
-//             j++;
-//         }
-//         i++;
-//     }
-// }
-
+#include "push_swap.h"
 
 int	is_sorted(t_stack *stack_a)
 {
@@ -28,52 +22,122 @@ int	is_sorted(t_stack *stack_a)
 	while (stack_a && stack_a->next)
 	{
 		if (stack_a->nbr > stack_a->next->nbr && flag)
-			return (0);
+			return (1);
 		if (stack_a->nbr > stack_a->next->nbr)
 			flag = 1;
 		stack_a = stack_a->next;
 	}
 	if (stack_a && stack_a->nbr > temp->nbr && flag)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
-
-void parsing(int argc, char **argv)
+char	**console_reader(int argc, char **argv)
 {
-    char *str;
-    char **res;
-    int i;
-    t_stack *stack_a;
-    t_stack *stack_b;
-   
-    stack_a = (t_stack *)malloc(sizeof(t_stack));
-    if (!stack_a)
-        return ;
-    i = 1;
-    str = ft_calloc(1, 1);
-    if (!str)
-    {
-        write(1, "Error!\n", 7);
-        return ;
-    }
-    while (i < argc)
-    {
-        str = ft_strjoin(str, argv[i]);
-        str = ft_strjoin(str, " ");
-        i++;
-    }
-    res = ft_split(str, ' ');
-    free(str);
+	char	*str;
+	char	**res;
+	int		i;
 
-    stack_a = fill_stack_a(res);
-    stack_b = fill_stack_b(&stack_a);
-    if (stack_b)
-        moving_to_stack_a(&stack_a, &stack_b);
+	i = 1;
+	str = ft_calloc(1, 1);
+	if (!str)
+	{
+		write(1, "Error!\n", 7);
+		return (NULL);
+	}
+	while (i < argc)
+	{
+		str = ft_strjoin(str, argv[i]);
+		str = ft_strjoin(str, " ");
+		i++;
+	}
+	res = ft_split(str, ' ');
+	free(str);
+	return (res);
+}
 
-    
-    // print_list(stack_a); //checking fulling struct
-    print_list(stack_b); //checking fulling struct
+void	insert_ranks(t_stack *stack_a, int *array)
+{
+	int	i;
 
-    free_matrix(res);
+	while (stack_a)
+	{
+		i = 0;
+		while (array[i] != stack_a->nbr)
+			i++;
+		stack_a->index = i;
+		stack_a = stack_a->next;
+	}
+}
+
+int	find_values(t_stack **stack_a, int *min, int *max, int *med)
+{
+	int	size;
+	int	*array;
+
+	size = ft_listsize(*stack_a);
+	array = (int *)malloc(sizeof(int) * size);
+	if (!array)
+		return (1);
+	array = sort_arr(*stack_a, array, size);
+	*min = array[0];
+	*max = array[size - 1];
+	*med = array[size / 2];
+	insert_ranks(*stack_a, array);
+	free(array);
+	array = NULL;
+	return (0);
+}
+
+void	final_sort(t_stack **stack_a)
+{
+	t_stack			*p;
+	int				min;
+	int				max;
+	int				med;
+	int				size;
+
+	if (find_values(stack_a, &min, &max, &med) > 0)
+		return ;
+	p = *stack_a;
+	med = 0;
+	while (p->nbr != min)
+	{
+		med++;
+		p = p->next;
+	}
+	size = ft_listsize(*stack_a);
+	if (med <= size - med)
+		while (med-- > 0)
+			ft_ra(stack_a);
+	else
+		while (med++ < size)
+			ft_rra(stack_a);
+}
+
+void	parsing(int argc, char **argv)
+{
+	char	**matrix;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	stack_a = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack_a)
+		return ;
+	matrix = console_reader(argc, argv);
+
+	stack_a = fill_stack_a(matrix);
+	if (is_sorted(stack_a))
+	{
+		stack_b = fill_stack_b(&stack_a);
+		while (stack_b)
+		{
+			moving_to_stack_a(&stack_a, &stack_b);
+		}
+	}
+	final_sort(&stack_a);
+	// print_list(stack_a); //checking fulling struct
+	// print_list(stack_b); //checking fulling struct
+
+    free_matrix(matrix);
 }

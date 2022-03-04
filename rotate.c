@@ -2,35 +2,29 @@
 
 void   	ft_ra(t_stack **stack_a)
 {
-    t_stack *first_elem;
-    t_stack *last_elem;
-    t_stack *new_head;
+   t_stack	*tmp;
 
-    first_elem = *stack_a;
-    *stack_a = (*stack_a)->next;
-    new_head = *stack_a;
-    while (new_head->next)
-        new_head = new_head->next;
-    last_elem = new_head;
-    first_elem->next = NULL;
-    last_elem->next = first_elem;
+	if (*stack_a && (*stack_a)->next)
+	{
+		tmp = *stack_a;
+		*stack_a = (*stack_a)->next;
+		tmp->next = NULL;
+		ft_listadd_back(stack_a, tmp);
+    }
     write(1, "ra\n", 3);
 }
 
 void   	ft_rb(t_stack **stack_b)
 {
-    t_stack *first_elem;
-    t_stack *last_elem;
-    t_stack *new_head;
+    t_stack	*tmp;
 
-    first_elem = *stack_b;
-    *stack_b = (*stack_b)->next;
-    new_head = *stack_b;
-    while (new_head->next)
-        new_head = new_head->next;
-    last_elem = new_head;
-    first_elem->next = NULL;
-    last_elem->next = first_elem;
+	if (*stack_b && (*stack_b)->next)
+	{
+		tmp = *stack_b;
+		*stack_b = (*stack_b)->next;
+		tmp->next = NULL;
+		ft_listadd_back(stack_b, tmp);
+    }
     write(1, "rb\n", 3);
 }
 
