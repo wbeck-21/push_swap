@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 01:39:52 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 20:20:14 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/05 22:22:09 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,24 @@ char	**console_reader(int argc, char **argv)
 	str = ft_calloc(1, 1);
 	if (!str)
 	{
-		write(1, "Error!\n", 7);
+		write(1, "Error\n", 6);
 		return (NULL);
 	}
 	while (i < argc)
 	{
 		str = ft_strjoin(str, argv[i]);
 		str = ft_strjoin(str, " ");
+		i++;
+	}
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
+		{
+			write(1, "Error\n", 6);
+			free(str);
+			return (NULL);
+		}
 		i++;
 	}
 	res = ft_split(str, ' ');
@@ -80,12 +91,17 @@ int	find_values(t_stack **stack_a, int *min, int *max, int *med)
 	if (!array)
 		return (1);
 	array = sort_arr(*stack_a, array, size);
+	if (!array)
+	{
+		free(array);
+		return (1);
+	}
 	*min = array[0];
 	*max = array[size - 1];
 	*med = array[size / 2];
 	insert_ranks(*stack_a, array);
 	free(array);
-	array = NULL;
+	// array = NULL;
 	return (0);
 }
 
@@ -99,14 +115,23 @@ void	parsing(int argc, char **argv)
 	if (!stack_a)
 		return ;
 	matrix = console_reader(argc, argv);
+	if (matrix == NULL)
+	{
+		free(stack_a);
+		return ;
+	}
 	stack_a = fill_stack_a(matrix);
 	if (is_sorted(stack_a))
 	{
 		stack_b = fill_stack_b(&stack_a);
-		while (stack_b)
+		if (stack_b == NULL)
 		{
-			moving_to_stack_a(&stack_a, &stack_b);
+			free(stack_a);
+			free_matrix(matrix);
+			return ;
 		}
+		while (stack_b)
+			moving_to_stack_a(&stack_a, &stack_b);
 	}
 	final_sort(&stack_a);
 	free_matrix(matrix);

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 18:16:18 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 22:28:30 by wbeck            ###   ########.fr       */
+/*   Created: 2022/03/05 21:32:51 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/05 21:43:06 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h" 
+// #include "push_swap.h"
 
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-		parsing(argc, argv);
-	else
-		write(1, "Error!\n", 7);
-	return (0);
-}
+// int	validation(int **array)
+// {
+// 	int	i;
+// 	int	j;
+
+
+// 	return (1);
+// }

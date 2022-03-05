@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 13:18:07 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 20:12:16 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/05 21:51:10 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 		j = i;
 		while (++j < size)
 		{
+			if (array[i] == array[j])
+			{
+				write(1, "Error\n", 6);
+				return (NULL);
+			}
 			if (array[i] > array[j])
 			{
 				temp = array[i];
@@ -72,7 +77,8 @@ t_stack	*fill_stack_b(t_stack **stack_a)
 	int		max;
 
 	stack_b = NULL;
-	size = find_values(stack_a, &min, &max, &med);
+	if (find_values(stack_a, &min, &max, &med) > 0)
+		return (NULL);
 	size = ft_listsize(*stack_a);
 	while (size > 3)
 	{
