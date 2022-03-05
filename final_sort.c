@@ -1,22 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   final_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 18:16:18 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 18:19:50 by wbeck            ###   ########.fr       */
+/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/05 20:20:27 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	final_sort(t_stack **stack_a)
 {
-	if (argc > 1)
-		parsing(argc, argv);
+	t_stack			*p;
+	int				min;
+	int				max;
+	int				med;
+	int				size;
+
+	if (find_values(stack_a, &min, &max, &med) > 0)
+		return ;
+	p = *stack_a;
+	med = 0;
+	while (p->nbr != min)
+	{
+		med++;
+		p = p->next;
+	}
+	size = ft_listsize(*stack_a);
+	if (med <= size - med)
+		while (med-- > 0)
+			ft_ra(stack_a);
 	else
-		write(1, "Error!\n", 7);
-	return (0);
+		while (med++ < size)
+			ft_rra(stack_a);
 }

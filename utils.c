@@ -1,21 +1,62 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/05 18:25:55 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/05 20:11:09 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void print_list(t_stack *stack_a)
+#include "push_swap.h"
+
+// void	print_list(t_stack *stack_a)
+// {
+// 	t_stack	*current;
+
+// 	current = stack_a;
+// 	while (current != NULL)
+// 	{
+// 		printf("%d\n", current->nbr);
+// 		current = current->next;
+// 	}
+// }
+
+t_stack	*ft_listlast(t_stack *list)
 {
-    t_stack *current = stack_a;
-    printf("\n\n\nstack_b\n");
-    while (current != NULL) 
-    {
-        printf("%d\n", current->nbr);
-        current = current->next;
-    }
+	if (list == NULL)
+		return (NULL);
+	if (list->next == NULL)
+		return (list);
+	else
+		return (ft_listlast(list->next));
+}
+
+t_stack	*before_last_stack_elem(t_stack *stack)
+{
+	if (stack == NULL)
+		return (NULL);
+	if (stack->next == NULL)
+		return (NULL);
+	if (stack->next->next == NULL)
+		return (stack);
+	else
+		return (before_last_stack_elem(stack->next));
+}
+
+void	stack_add_front(t_stack **stack, t_stack *new)
+{
+	new->next = *stack;
+	*stack = new;
 }
 
 void	free_matrix(char **res)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	while (i > 0)
 	{
 		free(res[i]);

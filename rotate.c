@@ -1,8 +1,20 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/05 18:23:01 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/05 18:23:35 by wbeck            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void   	ft_ra(t_stack **stack_a)
+#include "push_swap.h"
+
+void	ft_ra(t_stack **stack_a)
 {
-   t_stack	*tmp;
+	t_stack	*tmp;
 
 	if (*stack_a && (*stack_a)->next)
 	{
@@ -10,13 +22,13 @@ void   	ft_ra(t_stack **stack_a)
 		*stack_a = (*stack_a)->next;
 		tmp->next = NULL;
 		ft_listadd_back(stack_a, tmp);
-    }
-    write(1, "ra\n", 3);
+	}
+	write(1, "ra\n", 3);
 }
 
-void   	ft_rb(t_stack **stack_b)
+void	ft_rb(t_stack **stack_b)
 {
-    t_stack	*tmp;
+	t_stack	*tmp;
 
 	if (*stack_b && (*stack_b)->next)
 	{
@@ -24,12 +36,12 @@ void   	ft_rb(t_stack **stack_b)
 		*stack_b = (*stack_b)->next;
 		tmp->next = NULL;
 		ft_listadd_back(stack_b, tmp);
-    }
-    write(1, "rb\n", 3);
+	}
+	write(1, "rb\n", 3);
 }
 
-void   	ft_rr(t_stack **stack_a, t_stack **stack_b)
+void	ft_rr(t_stack **stack_a, t_stack **stack_b)
 {
-    ft_ra(stack_a);
-    ft_rb(stack_b);
+	ft_ra(stack_a);
+	ft_rb(stack_b);
 }

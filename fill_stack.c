@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 13:18:07 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/04 14:57:46 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/05 20:12:16 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,6 @@ t_stack	*fill_stack_b(t_stack **stack_a)
 	}
 	sort_triple(stack_a);
 	return (stack_b);
-}
-
-void	ft_listadd_back(t_stack **lst, t_stack *new_list)
-{
-	t_stack	*p;
-
-	if (*lst == NULL)
-		*lst = new_list;
-	else
-	{
-		p = ft_listlast(*lst);
-		p->next = new_list;
-	}
 }
 
 t_stack	*init_elem(int elem)

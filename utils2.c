@@ -1,22 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 18:16:18 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 18:19:50 by wbeck            ###   ########.fr       */
+/*   Created: 2022/03/05 20:11:47 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/05 20:24:04 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+void	ft_listadd_front(t_stack ***lst, t_stack *new)
 {
-	if (argc > 1)
-		parsing(argc, argv);
+	if (**lst)
+	{
+		new->next = **lst;
+		**lst = new;
+	}
 	else
-		write(1, "Error!\n", 7);
-	return (0);
+		**lst = new;
+}
+
+void	ft_listadd_back(t_stack **lst, t_stack *new_list)
+{
+	t_stack	*p;
+
+	if (*lst == NULL)
+		*lst = new_list;
+	else
+	{
+		p = ft_listlast(*lst);
+		p->next = new_list;
+	}
 }
