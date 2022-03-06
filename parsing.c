@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 01:39:52 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 22:22:09 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/06 19:16:55 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,17 @@ char	**console_reader(int argc, char **argv)
 	char	**res;
 	int		i;
 
-	i = 1;
 	str = ft_calloc(1, 1);
 	if (!str)
 	{
 		write(1, "Error\n", 6);
 		return (NULL);
 	}
+	i = 1;
 	while (i < argc)
 	{
 		str = ft_strjoin(str, argv[i]);
 		str = ft_strjoin(str, " ");
-		i++;
-	}
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z'))
-		{
-			write(1, "Error\n", 6);
-			free(str);
-			return (NULL);
-		}
 		i++;
 	}
 	res = ft_split(str, ' ');
@@ -67,42 +56,17 @@ char	**console_reader(int argc, char **argv)
 	return (res);
 }
 
-void	insert_ranks(t_stack *stack_a, int *array)
+char	**create_matrix(t_stack *stack_a, int argc, char **argv)
 {
-	int	i;
+	char	**matrix;
 
-	while (stack_a)
+	matrix = console_reader(argc, argv);
+	if (matrix == NULL)
 	{
-		i = 0;
-		while (array[i] != stack_a->nbr)
-			i++;
-		stack_a->index = i;
-		stack_a = stack_a->next;
+		free(stack_a);
+		return (NULL);
 	}
-}
-
-int	find_values(t_stack **stack_a, int *min, int *max, int *med)
-{
-	int	size;
-	int	*array;
-
-	size = ft_listsize(*stack_a);
-	array = (int *)malloc(sizeof(int) * size);
-	if (!array)
-		return (1);
-	array = sort_arr(*stack_a, array, size);
-	if (!array)
-	{
-		free(array);
-		return (1);
-	}
-	*min = array[0];
-	*max = array[size - 1];
-	*med = array[size / 2];
-	insert_ranks(*stack_a, array);
-	free(array);
-	// array = NULL;
-	return (0);
+	return (matrix);
 }
 
 void	parsing(int argc, char **argv)
@@ -114,15 +78,11 @@ void	parsing(int argc, char **argv)
 	stack_a = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack_a)
 		return ;
-	matrix = console_reader(argc, argv);
-	if (matrix == NULL)
-	{
-		free(stack_a);
-		return ;
-	}
+	matrix = create_matrix(stack_a, argc, argv);
 	stack_a = fill_stack_a(matrix);
 	if (is_sorted(stack_a))
 	{
+		sort_three(&stack_a);
 		stack_b = fill_stack_b(&stack_a);
 		if (stack_b == NULL)
 		{

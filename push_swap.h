@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 18:54:30 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 20:24:21 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/06 19:16:46 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	processor(t_stack **stack_a, t_stack **stack_b,
 void	stack_add_front(t_stack **stack, t_stack *new);
 void	ft_listadd_back(t_stack **lst, t_stack *new_list);
 void	final_sort(t_stack **stack_a);
+void	sort_three(t_stack **stack_a);
 
 int		*sort_arr(t_stack *elem, int *array, int size);
 int		find_values(t_stack **stack_a, int *min, int *max, int *med);
@@ -62,5 +63,7 @@ void	ft_rrb(t_stack **stack_b);
 void	ft_rrr(t_stack **stack_a, t_stack **stack_b);
 void	ft_pa(t_stack **stack_a, t_stack **stack_b);
 void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+
+// void	print_list(t_stack *stack_a);
 
 #endif

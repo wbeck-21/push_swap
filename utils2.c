@@ -6,11 +6,21 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:11:47 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 20:24:04 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/06 18:44:15 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+t_stack	*ft_listlast(t_stack *list)
+{
+	if (list == NULL)
+		return (NULL);
+	if (list->next == NULL)
+		return (list);
+	else
+		return (ft_listlast(list->next));
+}
 
 void	ft_listadd_front(t_stack ***lst, t_stack *new)
 {

@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_stack.c                                       :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 13:18:07 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 21:51:10 by wbeck            ###   ########.fr       */
+/*   Created: 2022/03/06 18:33:23 by wbeck             #+#    #+#             */
+/*   Updated: 2022/03/06 18:34:36 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*sort_arr(t_stack *elem, int *array, int size)
+static void	struct_to_arr(t_stack *elem, int *array, int size)
 {
 	int	i;
-	int	j;
-	int	temp;
 
 	i = -1;
 	while (++i < size)
@@ -24,6 +22,15 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 		array[i] = elem->nbr;
 		elem = elem->next;
 	}
+}
+
+int	*sort_arr(t_stack *elem, int *array, int size)
+{
+	int	i;
+	int	j;
+	int	temp;
+
+	struct_to_arr(elem, array, size);
 	i = -1;
 	while (++i < size - 1)
 	{
@@ -46,7 +53,7 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 	return (array);
 }
 
-void	sort_triple(t_stack **stack_a)
+void	sort_three(t_stack **stack_a)
 {
 	int	elem_0;
 	int	elem_1;
@@ -66,63 +73,4 @@ void	sort_triple(t_stack **stack_a)
 		if (elem_2 > elem_0 && elem_2 > elem_1 && elem_0 > elem_1)
 			ft_sa(stack_a);
 	}
-}
-
-t_stack	*fill_stack_b(t_stack **stack_a)
-{
-	t_stack	*stack_b;
-	int		size;
-	int		min;
-	int		med;
-	int		max;
-
-	stack_b = NULL;
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return (NULL);
-	size = ft_listsize(*stack_a);
-	while (size > 3)
-	{
-		if ((*stack_a)->nbr == max || (*stack_a)->nbr == med
-			|| (*stack_a)->nbr == min)
-			ft_ra(stack_a);
-		else
-		{
-			ft_pb(stack_a, &stack_b);
-			size--;
-		}
-	}
-	sort_triple(stack_a);
-	return (stack_b);
-}
-
-t_stack	*init_elem(int elem)
-{
-	t_stack	*elem_stack;
-
-	elem_stack = (t_stack *)malloc(sizeof(t_stack));
-	if (!elem_stack)
-		return (NULL);
-	elem_stack->nbr = elem;
-	elem_stack->count_ra = -1;
-	elem_stack->count_rra = -1;
-	elem_stack->count_rb = -1;
-	elem_stack->count_rrb = -1;
-	elem_stack->index = -1;
-	elem_stack->next = NULL;
-	return (elem_stack);
-}
-
-t_stack	*fill_stack_a(char **elem)
-{
-	int		i;
-	t_stack	*stack_a;
-
-	stack_a = NULL;
-	i = 0;
-	while (elem[i])
-	{
-		ft_listadd_back(&stack_a, init_elem(ft_atoi(elem[i])));
-		i++;
-	}
-	return (stack_a);
 }
