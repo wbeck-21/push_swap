@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 18:33:23 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/06 18:34:36 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/07 18:24:54 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 		{
 			if (array[i] == array[j])
 			{
-				write(1, "Error\n", 6);
+				ft_putstr_fd("Error\nthere are duplicates\n", 1);
 				return (NULL);
 			}
 			if (array[i] > array[j])

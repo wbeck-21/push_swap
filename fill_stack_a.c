@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 13:18:07 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/06 18:34:00 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/07 18:39:50 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_stack	*fill_stack_a(char **elem)
 	i = 0;
 	while (elem[i])
 	{
+		if (ft_atoi(elem[i]) > 2147483647)
+			return (NULL);
 		ft_listadd_back(&stack_a, init_elem(ft_atoi(elem[i])));
 		i++;
 	}
