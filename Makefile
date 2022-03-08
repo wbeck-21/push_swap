@@ -8,7 +8,12 @@ LIB		= ./libft/libft.a
 
 INC		= -I ./libft
 
-SRCS	= push_swap.c parsing.c swap.c rotate.c rev_rotate.c fill_stack_a.c fill_stack_b.c utils.c utils2.c moving_to_stack_a.c moving_to_stack_a2.c processor.c final_sort.c push.c sorting.c
+SRCS	= push_swap.c parsing.c \
+		swap.c rotate.c rev_rotate.c push.c \
+		fill_stack_a.c fill_stack_b.c \
+		utils.c utils2.c sorting.c \
+		moving_to_stack_a.c moving_to_stack_a2.c \
+		processor.c final_sort.c 
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -19,20 +24,20 @@ RM		= rm -rf
 all:	$(NAME)
 
 $(NAME):	$(OBJS)
-		# rm -rf $(NAME)
-		make -s -C libft
+		@$(RM) $(NAME)
+		@make -s -C libft
 		$(CC) $(FLAGS) -fsanitize=address -o $(NAME) $? $(LIB)
 
-%.o:	%.c
+%.o:	%.c $(HEADER)
 		$(CC) $(FLAGS) $(INC) -c $< -o $@
 
-bonus: $(B_NAME)
-
 clean:
-		$(RM) $(OBJS)
+		@make -s $@ -C libft
+		@$(RM) $(OBJS)
 
 fclean:	clean
-		$(RM) $(NAME)
+		@make -s $@ -C libft
+		@$(RM) $(NAME)
 
 re:	fclean all
 

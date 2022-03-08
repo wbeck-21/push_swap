@@ -6,11 +6,27 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 18:16:18 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/07 18:11:27 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/08 13:38:26 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h" 
+
+static int	ft_check_maxint(char **argv)
+{
+	long long int	nbr;
+	int				i;
+
+	i = 0;
+	while (argv[i])
+	{
+		nbr = ft_atoi(argv[i]);
+		if (nbr > 2147483647 || nbr < -2147483648)
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_checkarg(char **argv)
 {
@@ -44,6 +60,11 @@ int	main(int argc, char **argv)
 	if (!ft_checkarg(argv))
 	{
 		ft_putstr_fd("Error\nsome arguments aren’t integers\n", 1);
+		return (0);
+	}
+	if (!ft_check_maxint(argv))
+	{
+		ft_putstr_fd("Error\nsome arguments are bigger/smaller than an int\n", 1);
 		return (0);
 	}
 	if (argc > 1)
