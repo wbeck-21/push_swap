@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 18:54:30 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/07 18:35:16 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/08 18:52:58 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int		*sort_arr(t_stack *elem, int *array, int size);
 int		find_values(t_stack **stack_a, int *min, int *max, int *med);
 int		ft_listsize(t_stack *lst);
 int		find_count_moves(t_stack *stack_b, int *move_type);
+int		ft_checkarg(char **argv);
+int		ft_check_maxint(char **argv);
 
 void	ft_sa(t_stack **stack_a);
 void	ft_sb(t_stack **stack_b);
