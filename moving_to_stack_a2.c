@@ -6,25 +6,25 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:14:22 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/05 20:18:43 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/12 17:41:26 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_count_moves2(t_stack *stack_b, int *move_type, int profit_total_moves)
+int	find_count_moves2(t_stack *stack_b, int *move_type, int *profit_total_moves)
 {
-	if (profit_total_moves > stack_b->count_rra + stack_b->count_rb)
+	if (*profit_total_moves > stack_b->count_rra + stack_b->count_rb)
 	{
-		profit_total_moves = stack_b->count_rra + stack_b->count_rb;
+		*profit_total_moves = stack_b->count_rra + stack_b->count_rb;
 		*move_type = 5;
 	}
-	if (profit_total_moves > stack_b->count_ra + stack_b->count_rrb)
+	if (*profit_total_moves > stack_b->count_ra + stack_b->count_rrb)
 	{
-		profit_total_moves = stack_b->count_ra + stack_b->count_rrb;
+		*profit_total_moves = stack_b->count_ra + stack_b->count_rrb;
 		*move_type = 6;
 	}
-	return (profit_total_moves);
+	return (*profit_total_moves);
 }
 
 int	find_count_moves(t_stack *stack_b, int *move_type)
@@ -34,12 +34,12 @@ int	find_count_moves(t_stack *stack_b, int *move_type)
 
 	*move_type = 1;
 	profit_total_moves = stack_b->count_rb;
-	count_rotates = stack_b->count_rra;
 	if (stack_b->count_ra >= stack_b->count_rb)
 	{
 		profit_total_moves = stack_b->count_ra;
 		*move_type = 2;
 	}
+	count_rotates = stack_b->count_rra;
 	if (stack_b->count_rrb > count_rotates)
 		count_rotates = stack_b->count_rrb;
 	if (profit_total_moves > count_rotates)
@@ -51,7 +51,7 @@ int	find_count_moves(t_stack *stack_b, int *move_type)
 			*move_type = 4;
 	}
 	else
-		find_count_moves2(stack_b, move_type, profit_total_moves);
+		find_count_moves2(stack_b, move_type, &profit_total_moves);
 	return (profit_total_moves);
 }
 

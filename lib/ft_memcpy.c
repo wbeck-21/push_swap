@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   final_sort.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/12 15:43:22 by wbeck            ###   ########.fr       */
+/*   Created: 2021/10/10 14:09:34 by wbeck             #+#    #+#             */
+/*   Updated: 2021/10/13 16:30:43 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	final_sort(t_stack **stack_a)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_stack			*p;
-	int				min;
-	int				max;
-	int				med;
-	int				size;
+	unsigned char	*s;
+	unsigned char	*d;
 
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return ;
-	p = *stack_a;
-	med = 0;
-	while (p->nbr != min)
+	if (!dst && !src)
+		return (0);
+	s = (unsigned char *)src;
+	d = (unsigned char *)dst;
+	while (n > 0)
 	{
-		med++;
-		p = p->next;
+		*(d++) = *(s++);
+		n--;
 	}
-	size = ft_listsize(*stack_a);
-	if (med <= size - med)
-		while (med-- > 0)
-			ft_ra(stack_a);
-	else
-		while (med++ < size)
-			ft_rra(stack_a);
+	return (dst);
 }

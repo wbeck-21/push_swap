@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   final_sort.c                                       :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/12 15:43:22 by wbeck            ###   ########.fr       */
+/*   Created: 2021/10/10 14:09:52 by wbeck             #+#    #+#             */
+/*   Updated: 2021/10/13 16:30:52 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	final_sort(t_stack **stack_a)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	t_stack			*p;
-	int				min;
-	int				max;
-	int				med;
-	int				size;
+	unsigned char	*temp;
 
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return ;
-	p = *stack_a;
-	med = 0;
-	while (p->nbr != min)
+	temp = (unsigned char *)b;
+	while (len > 0)
 	{
-		med++;
-		p = p->next;
+		*temp = (unsigned char)c;
+		temp++;
+		len--;
 	}
-	size = ft_listsize(*stack_a);
-	if (med <= size - med)
-		while (med-- > 0)
-			ft_ra(stack_a);
-	else
-		while (med++ < size)
-			ft_rra(stack_a);
+	return (b);
 }

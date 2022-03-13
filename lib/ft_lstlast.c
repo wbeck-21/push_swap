@@ -1,39 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   final_sort.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/12 15:43:22 by wbeck            ###   ########.fr       */
+/*   Created: 2021/10/10 14:07:23 by wbeck             #+#    #+#             */
+/*   Updated: 2021/10/10 14:27:53 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	final_sort(t_stack **stack_a)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_stack			*p;
-	int				min;
-	int				max;
-	int				med;
-	int				size;
-
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return ;
-	p = *stack_a;
-	med = 0;
-	while (p->nbr != min)
-	{
-		med++;
-		p = p->next;
-	}
-	size = ft_listsize(*stack_a);
-	if (med <= size - med)
-		while (med-- > 0)
-			ft_ra(stack_a);
-	else
-		while (med++ < size)
-			ft_rra(stack_a);
+	if (lst)
+		while (lst->next)
+			lst = lst->next;
+	return (lst);
 }

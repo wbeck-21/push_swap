@@ -1,39 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   final_sort.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/12 15:43:22 by wbeck            ###   ########.fr       */
+/*   Created: 2021/10/10 14:14:16 by wbeck             #+#    #+#             */
+/*   Updated: 2021/10/13 16:31:38 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	final_sort(t_stack **stack_a)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	t_stack			*p;
-	int				min;
-	int				max;
-	int				med;
-	int				size;
+	size_t	srcsize;
 
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return ;
-	p = *stack_a;
-	med = 0;
-	while (p->nbr != min)
+	srcsize = ft_strlen(src);
+	if (srcsize + 1 < dstsize)
+		ft_memcpy(dst, src, srcsize + 1);
+	else if (dstsize != 0)
 	{
-		med++;
-		p = p->next;
+		ft_memcpy(dst, src, dstsize - 1);
+		dst[dstsize - 1] = '\0';
 	}
-	size = ft_listsize(*stack_a);
-	if (med <= size - med)
-		while (med-- > 0)
-			ft_ra(stack_a);
-	else
-		while (med++ < size)
-			ft_rra(stack_a);
+	return (srcsize);
 }

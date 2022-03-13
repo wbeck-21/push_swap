@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   final_sort.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/05 20:20:20 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/12 15:43:22 by wbeck            ###   ########.fr       */
+/*   Created: 2021/10/10 14:06:41 by wbeck             #+#    #+#             */
+/*   Updated: 2021/10/12 17:38:56 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	final_sort(t_stack **stack_a)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	t_stack			*p;
-	int				min;
-	int				max;
-	int				med;
-	int				size;
+	t_list	*temp;
 
-	if (find_values(stack_a, &min, &max, &med) > 0)
-		return ;
-	p = *stack_a;
-	med = 0;
-	while (p->nbr != min)
+	while (*lst)
 	{
-		med++;
-		p = p->next;
+		temp = (*lst)->next;
+		if ((*lst)->content)
+			del((*lst)->content);
+		free(*lst);
+		*lst = temp;
 	}
-	size = ft_listsize(*stack_a);
-	if (med <= size - med)
-		while (med-- > 0)
-			ft_ra(stack_a);
-	else
-		while (med++ < size)
-			ft_rra(stack_a);
 }

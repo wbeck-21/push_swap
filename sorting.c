@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 18:33:23 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/08 18:02:39 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/12 20:37:51 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static void	struct_to_arr(t_stack *elem, int *array, int size)
 	}
 }
 
+int	check(int *array, int i, int j)
+{
+	if (array[i] == array[j])
+	{
+		if (i != j)
+		{
+			ft_putstr_fd("Error\n", 1);
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	*sort_arr(t_stack *elem, int *array, int size)
 {
 	int	i;
@@ -37,11 +50,8 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 		j = i;
 		while (++j < size)
 		{
-			if (array[i] == array[j]) // || array[i] > 2147483647
-			{
-				ft_putstr_fd("Error\nthere are duplicates\n", 1);
+			if (!check(array, i, j))
 				return (NULL);
-			}
 			if (array[i] > array[j])
 			{
 				temp = array[i];
@@ -55,22 +65,22 @@ int	*sort_arr(t_stack *elem, int *array, int size)
 
 void	sort_three(t_stack **stack_a)
 {
-	int	elem_0;
-	int	elem_1;
-	int	elem_2;
 	int	size;
+	int	first;
+	int	second;
+	int	third;
 
 	size = ft_listsize(*stack_a);
 	if (size == 3)
 	{
-		elem_0 = (*stack_a)->nbr;
-		elem_1 = (*stack_a)->next->nbr;
-		elem_2 = (*stack_a)->next->next->nbr;
-		if (elem_0 > elem_2 && elem_0 > elem_1 && elem_1 > elem_2)
+		first = (*stack_a)->nbr;
+		second = (*stack_a)->next->nbr;
+		third = (*stack_a)->next->next->nbr;
+		if (second > third && second > first && third > first)
 			ft_sa(stack_a);
-		if (elem_1 > elem_2 && elem_1 > elem_0 && elem_2 > elem_0)
+		if (third > first && third > second && first > second)
 			ft_sa(stack_a);
-		if (elem_2 > elem_0 && elem_2 > elem_1 && elem_0 > elem_1)
+		if (first > third && first > second && second > third)
 			ft_sa(stack_a);
 	}
 }

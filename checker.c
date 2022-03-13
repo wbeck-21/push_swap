@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:17:47 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/08 18:53:46 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/13 14:09:05 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	console_sorting(t_stack **stack_a, t_stack **stack_b)
 		}
 		if (!do_instrs(stack_a, stack_b, instr))
 		{
-			ft_putstr_fd("Error\ninstruction doesn’t exist\n", 1);
+			ft_putstr_fd("Error\n", 1);
 			free(instr);
 			return ;
 		}
@@ -88,12 +88,12 @@ int	is_valid(char **argv)
 {
 	if (!ft_checkarg(argv))
 	{
-		ft_putstr_fd("Error\nsome arguments aren’t integers\n", 1);
+		ft_putstr_fd("Error\n", 1);
 		return (0);
 	}
 	if (!ft_check_maxint(argv))
 	{
-		ft_putstr_fd("Error\nsome arguments are bigger/smaller than an int\n", 1);
+		ft_putstr_fd("Error\n", 1);
 		return (0);
 	}
 	return (1);
@@ -103,17 +103,27 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	char	**matrix;
+	int		size;
 
+	stack_a = (t_stack *)malloc(sizeof(t_stack));
+	if (!stack_a)
+		return (0);
 	if (argc >= 2)
 	{
 		if (!is_valid(argv))
 			return (0);
-		stack_a = fill_stack_a(&stack_a);
+		matrix = create_matrix(stack_a, argc, argv);
+		stack_a = fill_stack_a(matrix);
+		size = ft_listsize(stack_a);
+		if (!is_dubl(stack_a, size))
+		{
+			ft_putstr_fd("Error\n", 1);
+			return (0);
+		}
 		console_sorting(&stack_a, &stack_b);
 		free(stack_a);
 		free(stack_b);
 	}
-	else
-		ft_putstr_fd("There're not any args\n", 1);
 	return (0);
 }

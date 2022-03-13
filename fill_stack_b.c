@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 18:09:37 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/07 18:36:28 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/12 19:17:16 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ t_stack	*fill_stack_b(t_stack **stack_a)
 			size--;
 		}
 	}
+	sort_three(stack_a);
 	return (stack_b);
 }

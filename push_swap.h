@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 18:54:30 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/08 18:52:58 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/09 16:13:53 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_stack	*ft_listlast(t_stack *list);
 t_stack	*before_last_stack_elem(t_stack *stack);
 t_stack	*find_profit_elem(t_stack *stack_b, int *move_type);
 
+char	**create_matrix(t_stack *stack_a, int argc, char **argv);
+
 void	parsing(int argc, char **argv);
 void	print_list(t_stack *stack_a);
 void	free_matrix(char **res);
@@ -52,6 +54,7 @@ int		find_values(t_stack **stack_a, int *min, int *max, int *med);
 int		ft_listsize(t_stack *lst);
 int		find_count_moves(t_stack *stack_b, int *move_type);
 int		ft_checkarg(char **argv);
+void	print_list(t_stack *stack_a);
 int		ft_check_maxint(char **argv);
 
 void	ft_sa(t_stack **stack_a);

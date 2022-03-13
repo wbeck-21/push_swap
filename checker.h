@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 16:17:11 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/08 18:47:28 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/13 14:09:47 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include "push_swap.h"
 
+size_t	ft_strlen_checker(const char *str);
 char	*get_next_line(int fd);
 char	*ft_strjoin_checker(char *str1, char *str2);
 int		ft_strchr_checker(char *str);
-size_t	ft_strlen_checker(const char *str);
+int		is_dubl(t_stack *stack_a, int size);
 
 void	ft_pa_checker(t_stack **stack_a, t_stack **stack_b);
 void	ft_pb_checker(t_stack **stack_a, t_stack **stack_b);

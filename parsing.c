@@ -6,7 +6,7 @@
 /*   By: wbeck <wbeck@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 01:39:52 by wbeck             #+#    #+#             */
-/*   Updated: 2022/03/07 19:48:07 by wbeck            ###   ########.fr       */
+/*   Updated: 2022/03/12 20:08:52 by wbeck            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,67 +32,34 @@ int	is_sorted(t_stack *stack_a)
 	return (0);
 }
 
-char	**console_reader(int argc, char **argv)
+void	sort_stack_a(t_stack **stack_a)
 {
-	char	*str;
-	char	**res;
-	int		i;
+	t_stack	*stack_b;
 
-	str = ft_calloc(1, 1);
-	if (!str)
+	stack_b = NULL;
+	sort_three(stack_a);
+	if (is_sorted(*stack_a))
 	{
-		write(1, "Error\n", 6);
-		return (NULL);
+		stack_b = fill_stack_b(stack_a);
+		if (!stack_b)
+			return ;
+		while (stack_b)
+			moving_to_stack_a(stack_a, &stack_b);
 	}
-	i = 1;
-	while (i < argc)
-	{
-		str = ft_strjoin(str, argv[i]);
-		str = ft_strjoin(str, " ");
-		i++;
-	}
-	res = ft_split(str, ' ');
-	free(str);
-	return (res);
-}
-
-char	**create_matrix(t_stack *stack_a, int argc, char **argv)
-{
-	char	**matrix;
-
-	matrix = console_reader(argc, argv);
-	if (matrix == NULL)
-	{
-		free(stack_a);
-		return (NULL);
-	}
-	return (matrix);
+	final_sort(stack_a);
+	free(stack_b);
 }
 
 void	parsing(int argc, char **argv)
 {
 	char	**matrix;
 	t_stack	*stack_a;
-	t_stack	*stack_b;
 
 	stack_a = (t_stack *)malloc(sizeof(t_stack));
 	if (!stack_a)
 		return ;
 	matrix = create_matrix(stack_a, argc, argv);
 	stack_a = fill_stack_a(matrix);
-	if (is_sorted(stack_a))
-	{
-		sort_three(&stack_a);
-		stack_b = fill_stack_b(&stack_a);
-		if (stack_b == NULL)
-		{
-			free(stack_a);
-			free_matrix(matrix);
-			return ;
-		}
-		while (stack_b)
-			moving_to_stack_a(&stack_a, &stack_b);
-	}
-	final_sort(&stack_a);
+	sort_stack_a(&stack_a);
 	free_matrix(matrix);
 }
